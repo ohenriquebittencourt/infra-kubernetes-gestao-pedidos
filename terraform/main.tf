@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-2"
 }
 
-resource "aws_eks_cluster" "my_cluster" {
+resource "aws_eks_cluster" "cluster_eks_gestao_pedidos" {
   name     = "my-cluster"
   role_arn = aws_iam_role.my_eks_role.arn
 
@@ -14,7 +14,7 @@ resource "aws_eks_cluster" "my_cluster" {
   depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
 }
 
-resource "aws_iam_role" "my_eks_role" {
+resource "aws_iam_role" "cluster_eks_gestao_pedidos_role" {
   name = "my-eks-role"
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -30,12 +30,12 @@ resource "aws_iam_role" "my_eks_role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
+resource "aws_iam_role_policy_attachment" "cluster_eks_gestao_pedidos_policy" {
   role       = aws_iam_role.my_eks_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "eks_service_policy" {
+resource "aws_iam_role_policy_attachment" "cluster_eks_gestao_pedidos_policy" {
   role       = aws_iam_role.my_eks_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
 }
